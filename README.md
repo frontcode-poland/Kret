@@ -26,6 +26,14 @@ Projekt podzielony jest na kilka katalogów. Każdy z nich odpowiada za konkretn
 
 * _**./src/templates/**_ katalog z templatkami stron i komponentów. Z tych plików generowane są statyczne pliki HTML. Więcej na ten temat przeczytasz tutaj: [Nunjucks](https://mozilla.github.io/nunjucks/).
 
-* _**./src/styles/**_ katalog ze stylami opisującymi cały projekt. Do pisania styli wykorzystany został preprocessor **Sass** a piki zawarte w tym katalogu posegregowane zostały zgdnie ze wzorcem architektury [7-1](https://sass-guidelin.es/pl/).
+* _**./src/assets/styles/**_ katalog ze stylami opisującymi cały projekt. Do pisania styli wykorzystany został preprocessor **Sass** a piki zawarte w tym katalogu posegregowane zostały zgdnie ze wzorcem architektury [7-1](https://sass-guidelin.es/pl/).
 
-* _**./src/scripts/**_ katalog ze skryptami. W projekcie tym do wytwarzania kodu JavaScript wykorzystany został Typescript, który przy pomocy Gulpa i Webpacka kompiluje pliki ***.ts** do dwóch wynikowych plików JS: scripts.min.js oraz scripts.vendors.min.js
+* _**./src/assets/scripts/**_ katalog ze skryptami. W projekcie tym do wytwarzania kodu JavaScript wykorzystany został Typescript, który przy pomocy Gulpa i Webpacka kompiluje pliki ***.ts** do dwóch wynikowych plików JS: scripts.min.js oraz scripts.vendors.min.js.
+
+* _**./src/assets/[images/fonts...]**_ ponadto w katalogu assets znajdują się foldery pomocnicze dla plików odpowiadające ich rodzajom - katalog dla plików graficznych / fontów etc.
+
+## Flow wytwarzania oprogramowania
+Aplikację rozwijamy wspomagając się techniką GitFlow:
+* [Bardzo przejrzysty opis techniki wraz z przykładami](https://nvie.com/posts/a-successful-git-branching-model/)
+* [Opis techniki stworzony przez zespół firmy Attlassian](https://pl.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
+
