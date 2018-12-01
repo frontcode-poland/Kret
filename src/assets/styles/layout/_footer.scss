@@ -9,8 +9,8 @@ Style guide: partials.footer
 */
 .app-footer {
   position: relative;
-  font-size: calculateRem(13px);
-  background: color('SEVENTH');
+  font-size: calculateRem(14px);
+  font-weight: 300;
   z-index: 3;
 
   &__row {
