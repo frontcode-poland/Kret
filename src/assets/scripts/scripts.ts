@@ -2,9 +2,12 @@ import {Utils} from "./utils";
 import {Component} from './component';
 
 import {Example} from "./components/example/example";
+import {Gradient} from "./components/gradient/gradient";
+import PlayStop from "./components/play-stop/play-stop";
 
 const availableComponents = {
-    example: Example
+    example: Example,
+    gradient: Gradient
 };
 
 export class App {
@@ -39,7 +42,7 @@ export class App {
     }
 
     private getAbstractComponents (): void {
-
+        PlayStop();
     }
 
     /**
