@@ -1,4 +1,4 @@
-# Lenka
+# Kret
 Zestaw gier i narzędzi wspomagających rehabilitację i rozwój dzieci cierpiących na neurologiczne zaburzenie rozwoju.
 
 ## Wymagania
