@@ -9,15 +9,30 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="col-content">
-                        {{ components.text(
-                            content = '
-                                <h1>Strona główna</h1>
-                                <p>Komponent tekstowy</p>
-                            '
-                        ) }}
+                        <section class="custom-title custom-title--center">
+                            <div class="custom-title__content">
+                                <h1 class="custom-title__heading">Poniżej znajduje się lista zadań</h1>
+                                <p class="custom-title__subheading">Wybierz jedno z nich</p>
+                            </div>
+                        </section>
 
-                        <section class="example || app-component" data-component="example">
-                            <p>Example Component</p>
+                        <section class="separator || app-component">
+                            <hr>
+                        </section>
+
+                        <section class="games-list || app-component">
+                            <div class="games-list__content">
+                                <ul class="games-list__items">
+                                    <li class="games-list__item">
+                                        <a href="./play-stop.html" class="game-link">
+                                            <div class="game-link__content">
+                                                <p class="game-link__name">Play & Stop</p>
+                                                <p class="game-link__description">Po ustalonym czasie film zatrzymuje się a zadaniem jest kontynuowanie jego odtwarzania poprzez odpowiednio długie wskazanie przycisku "play"</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </section>
                     </div>
                 </div>

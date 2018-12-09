@@ -1,0 +1,15 @@
+.separator {
+  position: relative;
+  display: block;
+  margin: 30px 0;
+
+  hr {
+    display: block;
+    width: 100%;
+    border: none;
+  }
+
+  &--small {
+    margin: 15px 0;
+  }
+}

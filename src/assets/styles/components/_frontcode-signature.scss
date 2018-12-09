@@ -1,0 +1,32 @@
+.frontcode-signature {
+  display: inline-block;
+  font-weight: 300;
+
+  &__icon {
+    display: inline-block;
+    vertical-align: baseline;
+    margin: 0 2px;
+    font-size: calculateRem(10px);
+    color: #ff0053;
+
+    &::before {
+      font-size: inherit;
+    }
+  }
+
+  &__text {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &__link {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &__logo {
+    display: block;
+    width: 70px;
+    margin-left: 5px;
+  }
+}
