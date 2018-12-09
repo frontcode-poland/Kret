@@ -1,0 +1,79 @@
+.games-list {
+  position: relative;
+  padding: 30px 0;
+
+  &__items {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: -20px;
+    list-style-type: none;
+  }
+
+  &__item {
+    width: 25%;
+    padding: 20px;
+
+    &:nth-child(1) {
+      .game-link__content {
+        border-color: #A2BBFF;
+      }
+    }
+
+    &:nth-child(2) {
+      .game-link__content {
+        border-color: #934DB7;
+      }
+    }
+
+    &:nth-child(3) {
+      .game-link__content {
+        border-color: #D9E695;
+      }
+    }
+  }
+}
+
+.game-link {
+  position: relative;
+  display: block;
+  padding-bottom: 100%;
+  color: color('PRIMARY');
+  border-radius: 50%;
+  background: rgba(#ffffff, 1);
+  box-shadow: 0 0 50px 0 rgba(#000000, .25);
+  transition: all 100ms linear;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    padding: 30px;
+    border: 5px #ffffff solid;
+    border-radius: 50%;
+  }
+
+  &__name {
+    display: block;
+    font-size: calculateRem(22px);
+    font-weight: 600;
+    text-align: center;
+  }
+
+  &__description {
+    margin-top: 20px;
+    font-size: calculateRem(14px);
+    font-weight: 400;
+    text-align: center;
+    line-height: 1.6em;
+  }
+
+  &:hover {
+    color: #ffffff;
+    background-color: rgba(color('PRIMARY'), .25);
+  }
+}
