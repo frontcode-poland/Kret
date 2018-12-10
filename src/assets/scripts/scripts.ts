@@ -3,7 +3,7 @@ import {Component} from './component';
 
 import {Example} from "./components/example/example";
 import {Gradient} from "./components/gradient/gradient";
-import PlayStop from "./components/play-stop/play-stop";
+require('./play-stop.js');
 
 const availableComponents = {
     example: Example,
@@ -42,7 +42,7 @@ export class App {
     }
 
     private getAbstractComponents (): void {
-        PlayStop();
+
     }
 
     /**

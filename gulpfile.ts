@@ -41,10 +41,17 @@ const CSS = {
     WATCH: DIR.SRC + 'assets/styles/**/*'
 };
 
-const JS = {
+const TS = {
     SRC: DIR.SRC + 'assets/scripts/scripts.ts',
     BUILD: DIR.BUILD + 'assets/scripts/',
-    WATCH: DIR.SRC + 'assets/scripts/**/*.ts',
+    WATCH: DIR.SRC + 'assets/scripts/**/*.{ts,js}',
+    ROOT: DIR.SRC + 'assets/scripts/'
+};
+
+const JS = {
+    SRC: DIR.SRC + 'assets/scripts/**/*.js',
+    BUILD: DIR.BUILD + 'assets/scripts/',
+    WATCH: DIR.SRC + 'assets/scripts/**/*.js',
     ROOT: DIR.SRC + 'assets/scripts/'
 };
 
@@ -126,18 +133,17 @@ export class Gulpfile {
 
     @Task()
     scripts() {
-        return gulp.src(JS.SRC)
+        return gulp.src(TS.SRC)
             .pipe(plumber())
             .pipe(webpackStream(webpackConfig, webpack))
             .pipe(gulpif(isProductionMode(), uglify()))
-            .pipe(gulp.dest(JS.BUILD));
+            .pipe(gulp.dest(TS.BUILD));
     }
 
     @SequenceTask('scripts:watch')
     scriptsWatch() {
         return ['scripts', 'reload'];
     }
-
 
     /**
      * Minify and compress images
@@ -268,7 +274,7 @@ export class Gulpfile {
     watch(done: Function) {
         gulp.watch(HTML.WATCH, ['templates:watch']);
         gulp.watch(CSS.WATCH, ['styles:watch']);
-        gulp.watch(JS.WATCH, ['scripts:watch']);
+        gulp.watch(TS.WATCH, ['scripts:watch']);
         gulp.watch([IMG.SRC, IMG.EXCLUDE], ['images:watch']);
         gulp.watch(VENDORS.SRC, ['scripts:watch']);
         gulp.watch(FONTS.SRC, ['fonts:watch']);
