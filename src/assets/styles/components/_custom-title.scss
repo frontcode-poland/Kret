@@ -4,15 +4,16 @@
   width: 100%;
 
   &__heading {
+    font-size: calculateRem(42px);
     font-weight: 100;
   }
 
   &__subheading {
-    margin-top: 15px;
-    font-size: calculateRem(24px);
+    margin-top: 20px;
+    font-size: calculateRem(22px);
     font-weight: 300;
     letter-spacing: .05em;
-    opacity: .75;
+    opacity: .95;
   }
 
   &--center {
