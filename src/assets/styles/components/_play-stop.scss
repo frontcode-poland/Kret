@@ -15,8 +15,22 @@
 
 #youtube
 {
-	float: left;
-	width: 450px;
+	float: center;
+	margin-left:120px;
 	text-align: center;
-	min-height: 800px;
+	border: 1px solid white;
+}
+
+button
+{
+	background: rgba(194, 192, 192, 0.89);
+	color: rgb(223, 92, 52);
+	border: 1px solid rgb(223, 92, 52);
+}
+
+.Przyciski:hover
+{
+	background-color: #222222;
+	color: white;
+	border: 1px solid white;
 }

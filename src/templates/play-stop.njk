@@ -5,10 +5,23 @@
 {% block content %}
 
 <div id="plansza">
-    <div id="parametry">
-        <div>Parametr - częstotliwość</div>
-        <input type-"text" id="timeout"/>
+    <div id="parametry">Parametry:
+        <div>Czas zatrzymania</div>
+        <div class="CzasZatrzymaniaParametr">
+            <input type="text" id="CzasZatrzymania" class="parametry" placeholder="Czas zatrzymania" aria-label="Czas zatrzymania" aria-describedby="btnCzasZatrzymania" value="10">
+            <div class="CzasZatrzymaniaPrzycisk">
+                <button class="Przyciski" type="button" id="btnCzasZatrzymania">Zapisz</button>
+            </div>
+        </div>
+
+        <div>Długość spojrzenia</div>
+        <div class="DlugoscSpojrzeniaParametr">
+            <input type="text" id="DlugoscSpojrzenia" class="parametry" placeholder="Długość spojrzenia" aria-label="Długość spojrzenia" aria-describedby="btnDlugoscSpojrzenia" value="3">
+            <div class="dlugoscSpojrzeniaPrzycisk">
+                <button class="Przyciski" type="button" id="btnDlugoscSpojrzenia">Zapisz</button>
+            </div>
+        </div>
     </div>
-<iframe width="983" height="553" src="https://www.youtube.com/embed/KhGNOJg-1s4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <iframe id="youtube" width="983" height="553" src="https://www.youtube.com/embed/KhGNOJg-1s4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 {% endblock %}
