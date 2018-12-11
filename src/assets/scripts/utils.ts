@@ -1,7 +1,7 @@
 import * as toastr from 'toastr';
 import * as Cookies from 'js-cookie';
 
-const ajax  = require('vendors/ajax');
+// const ajax  = require('vendors/ajax');
 
 export interface Offset {
     top: number,
@@ -52,9 +52,9 @@ export class Utils {
         })();
     };
 
-    static ajax (config: object): void {
-        ajax(config);
-    }
+    // static ajax (config: object): void {
+    //     ajax(config);
+    // }
 
     static makeCurrencyNumber (currency: string): string {
         return currency.replace(/ /g, '');

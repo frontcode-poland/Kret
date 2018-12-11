@@ -1,0 +1,23 @@
+{% import "_components/components.njk" as components %}
+{% set page = 'YOUTUBE' %}
+{% set title = 'Kret - youtube' %}
+{% extends "_layouts/default.njk" %}
+{% block content %}
+
+<article class="app-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-content">
+                    <section class="youtube-player || app-section" data-component="youtubePlayer">
+                        <iframe src="https://www.youtube.com/embed/qL7zrWcv6XY" data-ref="player" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+{% endblock %}
