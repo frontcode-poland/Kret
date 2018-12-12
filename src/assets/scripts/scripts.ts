@@ -4,7 +4,6 @@ import {Component} from './component';
 import {Example} from "./components/example/example";
 import {Gradient} from "./components/gradient/gradient";
 import {YoutubePlayer} from "./components/youtube-player/youtube-player";
-import PlayStop from "./components/play-stop/play-stop";
 
 const availableComponents = {
     example: Example,
@@ -44,7 +43,7 @@ export class App {
     }
 
     private getAbstractComponents (): void {
-        PlayStop();
+
     }
 
     /**

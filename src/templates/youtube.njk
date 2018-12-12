@@ -10,14 +10,13 @@
             <div class="col-md-12">
                 <div class="col-content">
                     <section class="youtube-player || app-section" data-component="youtubePlayer">
-                        <iframe src="https://www.youtube.com/embed/qL7zrWcv6XY" data-ref="player" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <div id="player"></div>
+                        {#<div id="player" data-plyr-provider="youtube" data-plyr-embed-id="qL7zrWcv6XY"></div>#}
                     </section>
                 </div>
             </div>
         </div>
     </div>
 </article>
-
-    <script src="https://www.youtube.com/iframe_api"></script>
 
 {% endblock %}

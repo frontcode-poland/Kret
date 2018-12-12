@@ -1,11 +1,9 @@
-/// <reference types="youtube" />
-
 import {Component} from "../../component";
 import {Utils} from "../../utils";
 
 const playerConfig = {
     interval: 5000,
-    hoverTimeout: 5000
+    hoverTimeout: 2000
 };
 
 enum VideoStatus {
@@ -15,30 +13,64 @@ enum VideoStatus {
 }
 
 export class YoutubePlayer extends Component {
-    private player: YT.Player;
-    private hoverInterval: any;
+    private player: any;
+    private playerElement: HTMLIFrameElement;
+    private hoverTimeout: any;
+    private playingTimeout: any;
     private videoStatus: VideoStatus;
 
     constructor (element) {
         super(element);
-        console.log('Youtube Player');
     }
 
     protected onMounted(): void {
-        this.initializeElements();
-        this.initializeEvents();
+        this.createScript();
+        this.checkIfApiLoaded();
     }
 
     protected onUnmounted(): void { }
 
-    private initializeElements (): void {
-        this.videoStatus = VideoStatus.Paused;
-        const playerPlaceholder = this.getRefs('player').first();
-        this.player = new YT.Player(playerPlaceholder, {
-            events: {
-                'onStateChange': this.onStateChange
+    private createScript (): void {
+        let tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        let firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    }
+
+    private checkIfApiLoaded () {
+        var checkIframeReadyInterval = setInterval (() => {
+            if (window['YT']) {
+                if (window['YT'].loaded) {
+                    this.initialize();
+                    clearInterval(checkIframeReadyInterval);
+                }
             }
         });
+    };
+
+    public initialize (): void {
+        this.initializeElements();
+    }
+
+    private initializeElements (): void {
+        this.videoStatus = VideoStatus.Paused;
+        this.player = new window['YT']['Player']('player', {
+            videoId: 'qL7zrWcv6XY',
+            playerVars: {
+                rel: 0,
+                showinfo: 0,
+                modestbranding: true
+            },
+            events: {
+                'onReady': (event) => {this.onReady(event)},
+                'onStateChange': (event) => {this.onStateChange(event)},
+            }
+        });
+    }
+
+    private onReady (event): void {
+        this.playerElement = this.player.getIframe();
+        this.initializeEvents();
     }
 
     private onStateChange (event): void {
@@ -58,36 +90,43 @@ export class YoutubePlayer extends Component {
     }
 
     private onStateEnded (): void {
-        this.videoStatus = VideoStatus.Ended
+        this.videoStatus = VideoStatus.Ended;
     }
 
     private onStatePause (): void {
-        this.videoStatus = VideoStatus.Paused
+        this.videoStatus = VideoStatus.Paused;
     }
 
     private onStatePlay (): void {
-        this.videoStatus = VideoStatus.Playing
+        this.videoStatus = VideoStatus.Playing;
+        this.playingTimeout = setTimeout(() => {
+            this.pauseVideo();
+        }, playerConfig.interval);
     }
 
     private initializeEvents (): void {
-        Utils.addEvent(this.player, 'mouseover', event => {
+        Utils.addEvent(document, 'mousemove', event => {
+           console.log('Mouse move');
+        });
+        Utils.addEvent(this.playerElement, 'mousemove', event => {
+            console.log(this.videoStatus);
             if (this.videoStatus === VideoStatus.Paused) {
-                this.hoverInterval = setInterval(() => {
-                    console.log('Hover OK');
+                this.hoverTimeout = setTimeout(() => {
+                    this.playVideo();
                 }, playerConfig.hoverTimeout);
             }
         });
 
-        Utils.addEvent(this.player, 'mouseout', event => {
-            clearInterval(this.hoverInterval);
+        Utils.addEvent(this.playerElement, 'mouseout', event => {
+            clearTimeout(this.hoverTimeout);
         });
     }
 
-    private stopVideo (): void {
-        this.player.stopVideo();
+    private pauseVideo (): void {
+        this.player.pauseVideo();
     }
 
-    private  playVideo (): void {
+    private playVideo (): void {
         this.player.playVideo();
     }
 }

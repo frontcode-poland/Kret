@@ -37,6 +37,7 @@
         "js-cookie": "^2.2.0",
         "normalize.css": "^8.0.0",
         "npm": "^6.4.1",
+        "plyr": "^3.4.7",
         "toastr": "^2.1.4",
         "youtube": "^0.1.0"
     }
