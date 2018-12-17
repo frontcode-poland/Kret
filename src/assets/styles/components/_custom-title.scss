@@ -2,16 +2,18 @@
   position: relative;
   display: block;
   width: 100%;
+  margin-top: 30px;
 
   &__heading {
     font-size: calculateRem(42px);
-    font-weight: 100;
+    font-weight: 400;
+    letter-spacing: .01em;
   }
 
   &__subheading {
-    margin-top: 20px;
+    margin-top: 15px;
     font-size: calculateRem(22px);
-    font-weight: 300;
+    font-weight: 400;
     letter-spacing: .05em;
     opacity: .95;
   }

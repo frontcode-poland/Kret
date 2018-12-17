@@ -1,0 +1,30 @@
+form, .form {
+  margin-bottom: 15px;
+}
+
+.form-group {
+  display: block;
+  width: 100%;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 3px;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: calculateRem(16px);
+  border: none;
+  border-radius: 3px;
+}
+
+.form-group {
+  input[type="submit"], button {
+    color: #ffffff;
+    background: color('PRIMARY');
+    cursor: pointer;
+  }
+}

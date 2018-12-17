@@ -9,9 +9,43 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="col-content">
-                    <section class="youtube-player || app-section" data-component="youtubePlayer">
-                        <div id="player"></div>
-                        {#<div id="player" data-plyr-provider="youtube" data-plyr-embed-id="qL7zrWcv6XY"></div>#}
+                    <form class="youtube-player-settings || form app-component" data-component="youtubePlayerSettings">
+                        <div class="youtube-player-settings__content">
+                            <div class="row bottom-xs">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="hoverTime" class="form-label">Czas koncentracji na przycisku:</label>
+                                        <input type="number" id="hoverTime" class="form-control" data-ref="hoverTime">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="playingTime" class="form-label">Czas jednolitego wyświetlania filmu:</label>
+                                        <input type="number" id="playingTime" class="form-control" data-ref="playingTime">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="videoUrl" class="form-label">URL filmu:</label>
+                                        <input type="text" id="videoUrl" class="form-control" data-ref="videoUrl">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <button class="form-control">Zapisz</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-content">
+                    <section class="youtube-player || app-component" data-component="youtubePlayer">
+                        <div id="player" data-plyr-provider="youtube" data-plyr-embed-id="qL7zrWcv6XY" data-ref="playerSourceElement"></div>
                     </section>
                 </div>
             </div>

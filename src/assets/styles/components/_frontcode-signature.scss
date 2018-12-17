@@ -1,13 +1,12 @@
 .frontcode-signature {
   display: inline-block;
-  font-weight: 300;
 
   &__icon {
     display: inline-block;
     vertical-align: baseline;
     margin: 0 2px;
     font-size: calculateRem(10px);
-    color: #ff0053;
+    color: #ff096b;
 
     &::before {
       font-size: inherit;

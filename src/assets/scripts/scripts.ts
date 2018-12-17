@@ -4,11 +4,13 @@ import {Component} from './component';
 import {Example} from "./components/example/example";
 import {Gradient} from "./components/gradient/gradient";
 import {YoutubePlayer} from "./components/youtube-player/youtube-player";
+import {YoutubePlayerSettings} from "./components/youtube-player/youtube-player-settings";
 
 const availableComponents = {
     example: Example,
     gradient: Gradient,
-    youtubePlayer: YoutubePlayer
+    youtubePlayer: YoutubePlayer,
+    youtubePlayerSettings: YoutubePlayerSettings
 };
 
 export class App {

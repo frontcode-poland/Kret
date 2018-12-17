@@ -1,10 +1,8 @@
 import {Component} from "../../component";
 import {Utils} from "../../utils";
-
-const playerConfig = {
-    interval: 5000,
-    hoverTimeout: 2000
-};
+import * as Plyr from 'plyr';
+import {IPlayerSettings} from "./youtube-player-settings-model";
+import {YoutubePlayerService} from "./youtube-player-service";
 
 enum VideoStatus {
     Paused,
@@ -13,80 +11,52 @@ enum VideoStatus {
 }
 
 export class YoutubePlayer extends Component {
+    private youtubePlayerService: YoutubePlayerService;
     private player: any;
-    private playerElement: HTMLIFrameElement;
+    private playerSourceElement: HTMLElement;
+    private playerButton: HTMLIFrameElement;
     private hoverTimeout: any;
     private playingTimeout: any;
     private videoStatus: VideoStatus;
+    private settings: IPlayerSettings;
 
     constructor (element) {
         super(element);
+        this.youtubePlayerService = YoutubePlayerService.getInstanceById('playerId');
     }
 
     protected onMounted(): void {
-        this.createScript();
-        this.checkIfApiLoaded();
+        this.initialize();
     }
 
     protected onUnmounted(): void { }
 
-    private createScript (): void {
-        let tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        let firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    }
-
-    private checkIfApiLoaded () {
-        var checkIframeReadyInterval = setInterval (() => {
-            if (window['YT']) {
-                if (window['YT'].loaded) {
-                    this.initialize();
-                    clearInterval(checkIframeReadyInterval);
-                }
-            }
-        });
-    };
 
     public initialize (): void {
         this.initializeElements();
-    }
-
-    private initializeElements (): void {
-        this.videoStatus = VideoStatus.Paused;
-        this.player = new window['YT']['Player']('player', {
-            videoId: 'qL7zrWcv6XY',
-            playerVars: {
-                rel: 0,
-                showinfo: 0,
-                modestbranding: true
-            },
-            events: {
-                'onReady': (event) => {this.onReady(event)},
-                'onStateChange': (event) => {this.onStateChange(event)},
-            }
-        });
-    }
-
-    private onReady (event): void {
-        this.playerElement = this.player.getIframe();
         this.initializeEvents();
     }
 
-    private onStateChange (event): void {
-        switch(event.data) {
-            case 0:
-                console.log('video ended');
-                this.onStateEnded();
-                break;
-            case 1:
-                console.log('video playing from ' + this.player.getCurrentTime());
-                this.onStatePlay();
-                break;
-            case 2:
-                console.log('video paused at ' + this.player.getCurrentTime());
-                this.onStatePause();
+    private initializeElements (): void {
+        this.settings = this.youtubePlayerService.settings;
+        this.videoStatus = VideoStatus.Paused;
+        this.playerSourceElement = this.getRefs('playerSourceElement').first();
+
+        if (this.playerSourceElement) {
+            this.playerSourceElement.setAttribute('data-plyr-embed-id', this.settings.videoId);
         }
+
+        this.player = new Plyr('#player', {
+            controls: ['play-large'],
+            settings: []
+        });
+
+        this.player.on('ready', event => {
+            this.player.source = '';
+            this.playerButton = this.player.elements.buttons.play[0];
+            this.initializeEvents();
+            this.initializeMouseEvents()
+        });
     }
 
     private onStateEnded (): void {
@@ -101,32 +71,43 @@ export class YoutubePlayer extends Component {
         this.videoStatus = VideoStatus.Playing;
         this.playingTimeout = setTimeout(() => {
             this.pauseVideo();
-        }, playerConfig.interval);
+        }, this.settings.playingTime);
     }
 
     private initializeEvents (): void {
-        Utils.addEvent(document, 'mousemove', event => {
-           console.log('Mouse move');
+        this.player.on('play', event => {
+            this.onStatePlay();
         });
-        Utils.addEvent(this.playerElement, 'mousemove', event => {
-            console.log(this.videoStatus);
-            if (this.videoStatus === VideoStatus.Paused) {
+
+        this.player.on('pause', event => {
+            this.onStatePause();
+        });
+
+        this.player.on('ended', event => {
+            this.onStateEnded();
+        });
+    }
+
+    private initializeMouseEvents (): void {
+        Utils.addEvent(this.playerButton, 'mousemove', event => {
+            if (this.videoStatus === VideoStatus.Paused && !this.hoverTimeout) {
                 this.hoverTimeout = setTimeout(() => {
                     this.playVideo();
-                }, playerConfig.hoverTimeout);
+                }, this.settings.hoverTime);
             }
         });
 
-        Utils.addEvent(this.playerElement, 'mouseout', event => {
+        Utils.addEvent(this.playerButton, 'mouseout', event => {
             clearTimeout(this.hoverTimeout);
+            this.hoverTimeout = null;
         });
     }
 
     private pauseVideo (): void {
-        this.player.pauseVideo();
+        this.player.pause();
     }
 
     private playVideo (): void {
-        this.player.playVideo();
+        this.player.play();
     }
 }

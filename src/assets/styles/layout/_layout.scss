@@ -1,11 +1,16 @@
+body {
+  background-image: url('../../assets/images/background.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
 .app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   overflow: hidden;
-
+  background: rgba(#FF6A77, 0.85);
   color: #ffffff;
-  background: #3d0075;
 }
 
 #app-background {

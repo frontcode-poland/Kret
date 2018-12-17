@@ -2,16 +2,22 @@
   position: relative;
   display: block;
   width: 100%;
-  padding-bottom: 50%;
+}
 
-  iframe {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    width: 100%;
-    height: 100%;
-  }
+.plyr {
+  border-radius: 12px;
+}
+
+.plyr__control--overlaid {
+  transform: translate(-50%, -50%) scale(2);
+  background: #ff1961;
+}
+
+.plyr--video .plyr__control.plyr__tab-focus, .plyr--video .plyr__control:hover, .plyr--video .plyr__control[aria-expanded=true] {
+  background: #ff1961;
+}
+
+.plyr__control.plyr__tab-focus {
+  box-shadow: 0 0 0 5px rgba(#ff1961,0.5);
+  outline: 0;
 }

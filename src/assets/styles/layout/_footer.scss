@@ -10,11 +10,11 @@ Style guide: partials.footer
 .app-footer {
   position: relative;
   font-size: calculateRem(12px);
-  font-weight: 300;
+  font-weight: 400;
   z-index: 3;
 
   &__row {
     position: relative;
-    padding: 40px 0;
+    padding: 40px 0 15px 0;
   }
 }
