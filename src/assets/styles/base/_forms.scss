@@ -24,7 +24,11 @@ form, .form {
 .form-group {
   input[type="submit"], button {
     color: #ffffff;
-    background: color('PRIMARY');
+    background: color('SECONDARY');
     cursor: pointer;
+
+    &:hover {
+      background: darken(color('SECONDARY'), 10%);
+    }
   }
 }

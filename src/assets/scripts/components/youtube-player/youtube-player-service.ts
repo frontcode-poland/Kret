@@ -37,7 +37,6 @@ export class YoutubePlayerService {
         } else {
             this.settingsModel = this.generateDefaultSettings();
         }
-        console.log(this.settingsModel);
     }
 
     private generateDefaultSettings (): IPlayerSettings {

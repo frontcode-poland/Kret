@@ -1,5 +1,5 @@
 import {Component} from "../../component";
-import {IPlayerSettings, PlayerSettingsModel} from "./youtube-player-settings-model";
+import {IPlayerSettings} from "./youtube-player-settings-model";
 import {Utils} from "../../utils";
 import {YoutubePlayerService} from "./youtube-player-service";
 
@@ -9,6 +9,7 @@ export class YoutubePlayerSettings extends Component {
     private hoverTimeField: HTMLInputElement;
     private playingTimeField: HTMLInputElement;
     private videoUrlField: HTMLInputElement;
+    private saveButton: HTMLButtonElement;
 
     constructor (element) {
         super(element);
@@ -28,49 +29,49 @@ export class YoutubePlayerSettings extends Component {
         this.hoverTimeField = this.getRefs('hoverTime').first();
         this.playingTimeField = this.getRefs('playingTime').first();
         this.videoUrlField = this.getRefs('videoUrl').first();
+        this.saveButton = this.getRefs('save').first();
     }
 
     private initializeValues (): void {
-        this.hoverTimeField.value = this.model.hoverTime.toString();
-        this.playingTimeField.value = this.model.playingTime.toString();
-        this.videoUrlField.value = this.model.videoId;
+        this.hoverTimeField.value = (this.model.hoverTime / 1000).toString();
+        this.playingTimeField.value = (this.model.playingTime / 1000).toString();
+        this.videoUrlField.value = this.makeUrlFromId(this.model.videoId);
     }
 
     private initializeEvents (): void {
         if (this.isCommpleteStructure()) {
             Utils.addEvent(this.hoverTimeField, 'change', event => {
-                this.model.hoverTime = parseInt(this.hoverTimeField.value);
-                this.saveSettings();
+                this.model.hoverTime = parseInt(this.hoverTimeField.value) * 1000;
             });
 
             Utils.addEvent(this.playingTimeField, 'change', event => {
-                this.model.playingTime = parseInt(this.playingTimeField.value);
-                this.saveSettings();
+                this.model.playingTime = parseInt(this.playingTimeField.value) * 1000;
             });
 
             Utils.addEvent(this.videoUrlField, 'change', event => {
                 this.model.videoId = this.getIdFromUrl(this.videoUrlField.value);
-                this.saveSettings();
+            });
+
+            Utils.addEvent(this.saveButton, 'click', event => {
+               event.preventDefault();
+               this.saveSettings();
+               location.reload();
             });
         }
     }
 
+    private makeUrlFromId (id): string {
+        return 'https://www.youtube.com/watch?v=' + id;
+    }
+
     private getIdFromUrl (url): string {
-        let videoId = this.model.videoId;
-        let newVideoId = url.split('v=')[1];
-        console.log(newVideoId);
-        if (typeof newVideoId !== 'undefined') {
-            videoId = newVideoId;
-            let ampersandPosition = newVideoId.indexOf('&');
-            if (ampersandPosition !== -1) {
-                videoId = newVideoId.substring(0, ampersandPosition);
-            }
-        }
-        return videoId;
+        const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+        const match = url.match(regExp);
+        return (match&&match[7].length==11)? match[7] : this.model.videoId;
     };
 
     private isCommpleteStructure (): Boolean {
-        return (!!this.hoverTimeField && !!this.playingTimeField && !!this.videoUrlField);
+        return (!!this.hoverTimeField && !!this.playingTimeField && !!this.videoUrlField && !!this.saveButton);
     }
 
     private saveSettings (): void {
