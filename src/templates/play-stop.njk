@@ -4,24 +4,38 @@
 {% extends "_layouts/default.njk" %}
 {% block content %}
 
-<div id="plansza">
-    <div id="parametry">Parametry:
+<div id="board">
+    <div id="parameters">Parametry:
         <div>Czas zatrzymania</div>
-        <div class="CzasZatrzymaniaParametr">
-            <input type="text" id="CzasZatrzymania" class="parametry" placeholder="Czas zatrzymania" aria-label="Czas zatrzymania" aria-describedby="btnCzasZatrzymania" value="10">
-            <div class="CzasZatrzymaniaPrzycisk">
-                <button class="Przyciski" type="button" id="btnCzasZatrzymania">Zapisz</button>
+        <div class="TimeoutParametr">
+            <input type="text" id="Timeout" class="parameters" placeholder="Czas zatrzymania" aria-label="Czas zatrzymania" aria-describedby="btnCzasZatrzymania" value="10">
+            <div class="TimeoutButton">
+                <button class="Buttons" type="button" id="btnTimeout">Zapisz</button>
             </div>
         </div>
 
         <div>Długość spojrzenia</div>
-        <div class="DlugoscSpojrzeniaParametr">
-            <input type="text" id="DlugoscSpojrzenia" class="parametry" placeholder="Długość spojrzenia" aria-label="Długość spojrzenia" aria-describedby="btnDlugoscSpojrzenia" value="3">
-            <div class="dlugoscSpojrzeniaPrzycisk">
-                <button class="Przyciski" type="button" id="btnDlugoscSpojrzenia">Zapisz</button>
+        <div class="BlinkParametr">
+            <input type="text" id="Blink" class="parameters" placeholder="Długość spojrzenia" aria-label="Długość spojrzenia" aria-describedby="btnDlugoscSpojrzenia" value="3">
+            <div class="BilnkButton">
+                <button class="BlinkButton" type="button" id="btnBilnk">Zapisz</button>
             </div>
         </div>
     </div>
-    <iframe id="youtube" width="983" height="553" src="https://www.youtube.com/embed/KhGNOJg-1s4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+        <div class="container">
+            <input type="text" id="link" placeholder="Tu wklej link do utworu"><button class="Buttons" type="button" id="btnLoadVideo">Odtwarzaj</button>
+            <div id="player" data-plyr-provider="youtube" data-plyr-embed-id="5e-VG0WnQww"></div>
+            <div class="actions">
+                <button type="button" class="btn js-play"><img src="images/play.png"></button>
+            <!--<button type="button" class="btn js-pause">Pause</button>
+                <button type="button" class="btn js-stop">Stop</button>
+                <button type="button" class="btn js-rewind">Rewind</button>
+                <button type="button" class="btn js-forward">Forward</button> -->
+            </div>
+        </div>
+
+
+
 </div>
 {% endblock %}

@@ -212,7 +212,7 @@ export class Gulpfile {
      */
     @SequenceTask()
     build() {
-        return ['clean', 'fonts', 'images', 'styles', 'scripts', 'templates'];
+        return ['clean', 'fonts', 'images', 'styles', 'scripts', 'templates', 'vendors'];
     }
 
     /**
@@ -223,7 +223,7 @@ export class Gulpfile {
      */
     @SequenceTask('build:prod')
     buildProduction() {
-        return ['setProdEnv', 'clean', 'fonts', 'images', 'styles', 'scripts', 'templates'];
+        return ['setProdEnv', 'clean', 'fonts', 'images', 'styles', 'scripts', 'templates', 'vendors'];
     }
 
     /**
